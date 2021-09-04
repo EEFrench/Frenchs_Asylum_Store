@@ -5,7 +5,8 @@ import { getProducts } from './utils/store_utils';
 
 
 function App() {
-  getProducts();
+
+  getProducts(); //INVOKES getProducts FUNCTION
 
   return (
     <div className="App">
