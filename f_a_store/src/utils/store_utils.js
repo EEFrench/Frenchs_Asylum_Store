@@ -6,6 +6,6 @@ export const getProducts = async (
   
   const response = await fetch(API_URL);
   const json = await response.json();
-  //console.log(json);
+  console.log(json);
   return json;
 };

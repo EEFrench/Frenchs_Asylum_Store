@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import './App.css';
 import { getProducts } from './utils/store_utils';
 import Products from './components/Products';
+import ProductDetails from "./components/ProductDetails";
+
 
 function App() {
   const [items, setItems] = useState([]);

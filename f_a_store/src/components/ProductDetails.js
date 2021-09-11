@@ -28,13 +28,13 @@ const ProductDetails = (props) => {
     );
 };
 
-ProductDetails.PropTypes = {
-    image: PropType.string.isRequired,
-    title: PropType.string.isRequired,
-    price: PropType.string.isRequired,
-    category: PropType.string.isRequired,
-    quntity: PropType.string.isRequired,
-    description: PropType.string.isRequired,
+ProductDetails.propTypes = {
+    image: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    price: PropTypes.string.isRequired,
+    category: PropTypes.string.isRequired,
+    quntity: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
 };
 
 export default ProductDetails;
