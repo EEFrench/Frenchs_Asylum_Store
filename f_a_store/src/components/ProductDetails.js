@@ -33,7 +33,7 @@ ProductDetails.propTypes = {
     title: PropTypes.string.isRequired,
     price: PropTypes.string.isRequired,
     category: PropTypes.string.isRequired,
-    quntity: PropTypes.string.isRequired,
+    quantity: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
 };
 
