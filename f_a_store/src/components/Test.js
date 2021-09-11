@@ -145,4 +145,16 @@ class App extends React.Component {
   }
 }
 
+ProductDetails.PropTypes = {
+    image: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    price: PropTypes.string.isRequired,
+    category: PropTypes.string.isRequired,
+    quantity: PropTypes.number.isRequired,
+    description: PropTypes.string.isRequired,
+  };
+  
+
+
+
 export default App;
