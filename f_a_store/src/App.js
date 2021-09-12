@@ -22,32 +22,6 @@ function App() {
       />
     </div>
   );
-  // render() {
-  //   const { selectProduct } = this.state;
-
-
-  // return (
-  //     <div>
-  //       {/* {this.state.isLoading && <p>Loading...</p>}
-  //       <ProductList movies={this.state.movies} onMovieCardClicked={this.onMovieClicked} /> */}
-  //       {/* <Paginator currentPage={this.state.page} getNextPage={() => this.updatePage(1)} getPrevPage={() => this.updatePage(-1)} /> */}
-  //       {this.state.showModal &&
-  //         <Modal show={this.state.showModal} onClose={() => this.updateShowModalState(false)}>
-  //           <productDetails 
-  //               image={selectProduct.Image}
-  //               title={selectProduct.Title}
-  //               price={selectProduct.Price}
-  //               category={selectProduct.Category}
-  //               //quantity={selectProduct.Plot}
-  //               description={selectProduct.Description}
-  //           />
-  //         </Modal>
-  //       }
-  //     </div>
-  //   )
-  }
-//}
-
-
+}
 
 export default App;
