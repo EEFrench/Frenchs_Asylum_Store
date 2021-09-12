@@ -1,4 +1,4 @@
-import '../style/modal.css';
+//import '../style/modal.css';
 
 const Modal = ({show = false, onClose, children}) => {
     return(
