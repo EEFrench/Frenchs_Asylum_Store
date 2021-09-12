@@ -3,7 +3,7 @@ import './App.css';
 import { getProducts } from './utils/store_utils';
 import Products from './components/Products';
 import ProductDetails from "./components/ProductDetails";
-import Modal from "./components/Modal";
+//import Modal from "./components/Modal";
 
 
 function App() {
