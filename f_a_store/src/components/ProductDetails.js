@@ -1,4 +1,4 @@
-import "../styles/styles.css"
+//import "../styles/styles.css"
 import PropTypes from "prop-types"
 
 const ProductDetails = (props) => {
