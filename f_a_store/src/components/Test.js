@@ -1,160 +1,104 @@
-import React from 'react';
-import Modal from './Modal';
-import MovieList from './MovieList';
-import MovieDetails from './MovieDetails';
-import {getMovieDetailsById, getMoviesByName} from '../utils/utils'
-import SearchBar from './SearchBar';
-import Paginator from './Paginator';
+import React, { useState, useEffect } from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
+import Products from './components/Products/Products';
+import Navbar from './components/Navbar/Navbar';
+import Cart from './components/Cart/Cart';
+import Checkout from './components/Checkout/Checkout';
 
-    this.state = {
-      movies: [],
-      search: 'batman',
-      type: '',
-      isLoading: false,
-      error: null,
-      showModal: false,
-      selectedMovieId: null,
-      selectedMovie: null,
-      page: 1,
+import { commerce } from './lib/commerce';
+
+const App = () => {
+    const [products, setProducts] = useState([]);
+    const [cart, setCart] = useState({});
+    const [order, setOrder] = useState({});
+    const [errorMessage, setErrorMessage] = useState('');
+
+    const fetchProducts = async () => {
+        const { data } = await commerce.products.list();
+    
+        setProducts(data);
     };
 
-    this.updateShowModalState = this.updateShowModalState.bind(this);
-    this.onMovieClicked = this.onMovieClicked.bind(this);
-    this.onSearchFormSubmit = this.onSearchFormSubmit.bind(this);
-  }
+    const fetchCart = async () => {
+        setCart(await commerce.cart.retrieve());
+    };
 
-  async componentDidMount() {
-    this.setState({
-      isLoading: true,
-    });
+    const handleAddToCart = async (productId, quantity) => {
+        const { cart } = await commerce.cart.add(productId, quantity);
 
-    setTimeout(async () => {
-      try {
-        const movies = await getMoviesByName(this.state.search);
-        this.setState({
-          movies,
-          error: null,
-          isLoading: false,
-        });
-      } catch(error) {
-        this.setState({
-          movies: [],
-          error,
-          isLoading: false,
-        });
-      }
-    },
-      5000
-    )
-  }
+        setCart(cart);
+    };
 
-  async componentDidUpdate(prevProps, prevState) {
-    if (prevState.selectedMovieId !== this.state.selectedMovieId) {
-      try {
-        const newMovie = await getMovieDetailsById(this.state.selectedMovieId);
-        this.setState({
-          selectedMovie: newMovie,
-          showModal: true
-        });
-      } catch(error) {
-        this.setState({
-          error: error,
-          showModal: false,
-        });
-      }
-    }
+    const handleUpdateCartQty = async (productId, quantity) => {
+        const { cart } = await commerce.cart.update(productId, { quantity });
 
-    if (prevState.search !== this.state.search || prevState.type !== this.state.type || prevState.page !== this.state.page) {
-      try {
-        const newMovies = await getMoviesByName(this.state.search, this.state.type, this.state.page);
-        this.setState({
-          movies: newMovies,
-          error: null,
-        });
-      } catch(error) {
-        this.setState({
-          error: error,
-          movies: [],
-        });
-      }
-    }
-  }
+        setCart(cart);
+    };
 
-  updateShowModalState(shouldShow) {
-    this.setState({
-      showModal: shouldShow
-    });
-  }
+    const handleRemoveFromCart = async (productId) => {
+        const { cart } = await commerce.cart.remove(productId);
 
-  onMovieClicked(id) {
-    this.setState({
-      selectedMovieId: id,
-    });
-  }
+        setCart(cart);
+    };
 
-  onSearchFormSubmit(search, type) {
-    this.setState({
-      search,
-      type
-    });
+    const handleEmptyCart = async () => {
+        const { cart } = await commerce.cart.empty();
 
-    console.log(search, type)
-  }
+        setCart(cart);
+    };
 
-  updatePage(ammount) {
-    this.setState((prevState) => {
-      const newPage = prevState.page + ammount;
+    const refreshCart = async () => {
+        const newCart = await commerce.cart.refresh();
+    
+        setCart(newCart);
+    };
 
-      if (newPage > 0 && newPage < 101) {
-        return { page: newPage };
-      }
+    const handleCaptureCheckout = async (checkoutTokenId, newOrder) => {
+        try {
+            const incomingOrder = await commerce.checkout.capture(checkoutTokenId, newOrder);
+        
+            setOrder(incomingOrder);
+        
+            refreshCart();
+        } catch (error) {
+            setErrorMessage(error.data.error.message);
+        }
+    };
 
-      return { page: prevState.page };
-    });
-  }
-
-  render() {
-    const { selectedMovie } = this.state;
+    useEffect(() => {
+        fetchProducts();
+        fetchCart();
+    }, []);
 
     return (
-      <div>
-        <SearchBar onSubmit={this.onSearchFormSubmit} />
-        {this.state.isLoading && <p>Loading...</p>}
-        <MovieList movies={this.state.movies} onMovieCardClicked={this.onMovieClicked} />
-        <Paginator currentPage={this.state.page} getNextPage={() => this.updatePage(1)} getPrevPage={() => this.updatePage(-1)} />
-        {this.state.showModal &&
-          <Modal show={this.state.showModal} onClose={() => this.updateShowModalState(false)}>
-            <MovieDetails 
-               posterUrl={selectedMovie.Poster}
-               title={selectedMovie.Title}
-               rating={selectedMovie.Ratings[0].Value}
-               rated={selectedMovie.Rated}
-               runtime={selectedMovie.Runtime}
-               genre={selectedMovie.Genre}
-               plot={selectedMovie.Plot}
-               actors={selectedMovie.Actors}
-            />
-          </Modal>
-        }
-      </div>
+        <Router>
+            <div>
+                <Navbar totalItems={cart.total_items}/>
+                <Routes>
+                    <Route exact path='/'>
+                        <Products products={products} onAddToCart={handleAddToCart} />
+                    </Route>
+                    <Route exact path='/cart'>
+                        <Cart 
+                            cart={cart}
+                            handleUpdateCartQty={handleUpdateCartQty}
+                            handleRemoveFromCart={handleRemoveFromCart}
+                            handleEmptyCart={handleEmptyCart}
+                        />
+                    </Route>
+                    <Route exact path='/checkout'>
+                        <Checkout 
+                        cart={cart} 
+                        order={order}
+                        onCaptureCheckout={handleCaptureCheckout}
+                        error={errorMessage}
+                        />
+                    </Route>
+                </Routes>
+            </div>
+        </Router>
     )
-  }
 }
 
-ProductDetails.PropTypes = {
-    image: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    price: PropTypes.string.isRequired,
-    category: PropTypes.string.isRequired,
-    quantity: PropTypes.number.isRequired,
-    description: PropTypes.string.isRequired,
-  };
-  
-
-
-
-export default App;
+export default App
