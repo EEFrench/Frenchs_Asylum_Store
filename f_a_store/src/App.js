@@ -3,7 +3,8 @@ import './App.css';
 import { getProducts } from './utils/store_utils';
 import Products from './components/Products';
 import ProductDetails from "./components/ProductDetails";
-import Navbar from "./components/NavBar";
+//import Navbar from "./components/NavBar"; //NavBar.jsx
+import NavBar from "./components/NavBar"; //NavBar.js
 //import Modal from "./components/Modal";
 
 
@@ -17,10 +18,12 @@ function App() {
   )
   return (
     <div className="App">
+      <NavBar />
       <Products
       items ={items} // FIRST "items" IS A VARIABLE, 
       //SECOND {items} IS THE PROP
       />
+      
     </div>
   );
 }
