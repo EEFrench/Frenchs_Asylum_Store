@@ -11,14 +11,14 @@ export const SideBarData = [
         link: "/home"
     },
     {
-        title: "Shopping",
+        title: "Cart",
         icon: <AddShoppingCartIcon/>,
-        link: "/home"
+        link: "/cart"
     },
     {
-        title: "Cart",
+        title: "Checkout",
         icon: <ShoppingCartIcon/>,
-        link: "/home"
+        link: "/checkout"
     },
     {
         title: "...?",
