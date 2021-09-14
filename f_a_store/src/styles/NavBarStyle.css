@@ -8,6 +8,7 @@
 
 li{
     list-style-type: none;
+    font-family: "Bookman Caps";
 }
 
 a{
@@ -20,12 +21,28 @@ nav{
     min-height: 10vh;
     align-items: center;
     font: fallback;
-    font-family: "French's Asylum";
-    color: antiquewhite;
+    color: #9a01cd;
+    background-color: #ffa202;
 }
 
 nav .logo{
     font-size: 22px;
     font-weight: 700;
     text-transform: uppercase;
+    font-family: "French's Asylum";
+}
+
+nav .logo img{
+    width:150px;
+}
+
+nav .nav-links {
+    display: flex;
+    justify-content: space-around;
+    width: 30%;
+}
+
+nav .nav-links a{
+    font-size: 18px;
+    font-weight: normal;
 }

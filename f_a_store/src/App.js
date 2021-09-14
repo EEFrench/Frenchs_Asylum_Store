@@ -3,8 +3,8 @@ import './App.css';
 import { getProducts } from './utils/store_utils';
 import Products from './components/Products';
 import ProductDetails from "./components/ProductDetails";
-//import Navbar from "./components/Navbar.jsx"; //NavBar.jsx
-import NavBar from "./components/NavBar"; //NavBar.js
+import SideBar from "./components/SideBar";
+//import NavBar from "./components/NavBar"; //NavBar.js
 //import Modal from "./components/Modal";
 
 
@@ -18,7 +18,8 @@ function App() {
   )
   return (
     <div className="App">
-      <NavBar />
+      {/* <NavBar /> */}
+      <SideBar/>
       <Products
       items ={items} // FIRST "items" IS A VARIABLE, 
       //SECOND {items} IS THE PROP
