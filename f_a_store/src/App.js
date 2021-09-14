@@ -3,7 +3,7 @@ import './App.css';
 import { getProducts } from './utils/store_utils';
 import Products from './components/Products';
 import ProductDetails from "./components/ProductDetails";
-//import Navbar from "./components/NavBar"; //NavBar.jsx
+//import Navbar from "./components/Navbar.jsx"; //NavBar.jsx
 import NavBar from "./components/NavBar"; //NavBar.js
 //import Modal from "./components/Modal";
 

@@ -1,3 +1,5 @@
+@import url(./fonts.css);
+
 *{
     margin: 0;
     padding: 0;
@@ -17,6 +19,8 @@ nav{
     justify-content: space-around;
     min-height: 10vh;
     align-items: center;
+    font: fallback;
+    font-family: "French's Asylum";
     color: antiquewhite;
 }
 

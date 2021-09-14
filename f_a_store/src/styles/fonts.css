@@ -1,0 +1,39 @@
+  @font-face {
+    font-family: "Sagacity Caps";
+    src: url(./fonts/Sagacity-Caps.otf);
+  }
+  
+  @font-face {
+    font-family: "Sagacity";
+    src: url(./fonts/Sagacity.otf);
+  }
+    
+  @font-face {
+    font-family: "French's Asylum";
+    src: url(./fonts/FrenchsAsylum.otf);
+  }
+  
+   @font-face {
+    font-family: "EEF";
+    src: url(./fonts/EEF.otf);
+  }
+  
+  @font-face {
+    font-family: "EEFBolder";
+    src: url(./fonts/EEFBolder.otf);
+  }
+ 
+  @font-face {
+      font-family: "Bookman Caps";
+      src: url(./fonts/BOOKOSB_CAPS.otf);
+  }
+
+  @font-face {
+     font-family: "HeadlineFA";
+     src: url(./fonts/HeadlineFA.otf);
+ }
+
+ @font-face {
+     font-family: "Jani-Hand";
+     src: url(./fonts/Jani-Hand.otf);
+ }
