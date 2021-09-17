@@ -1,0 +1,24 @@
+.product-card {
+    display: inline-block;
+    flex-direction: column;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    width: 250px;
+    background-color: orange;
+  }
+  
+  .product-card img {
+    width: 100%;
+  }
+  
+  .product-card-info {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+  }
+  
+  .product-card-info p {
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    font-weight: bold;
+  }
